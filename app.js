@@ -6,7 +6,7 @@ const productRoutes = require('./routes/productsRoutes')
 const app = express();
 const port = 3000
 app.use(express.json());
-app.use(process.env.API_ROUTE,productRoutes)
+app.use('/api/v1/store',productRoutes)
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
