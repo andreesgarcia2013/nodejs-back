@@ -7,7 +7,7 @@ const brand=require('../models/brand')
 
 
 const { ObjectId } = require('mongodb');
-const Product = require('../../mongoose/models/product');
+const Product = require('../models/product');
 
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
