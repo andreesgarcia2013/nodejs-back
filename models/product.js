@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const brand=require('./brand')
 
 const productSchema=mongoose.Schema({
-    // _id:{type: ObjectID, required: true},
     name: { type: String, required: true },
     description: { type: String, required: true, trim: true },
     price: { type: Number, required: true },

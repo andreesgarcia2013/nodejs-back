@@ -4,10 +4,8 @@ const router = express.Router()
 const product= require('../models/product')
 const category= require('../models/category')
 const brand=require('../models/brand')
-
-
 const { ObjectId } = require('mongodb');
-const Product = require('../models/product');
+
 
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
