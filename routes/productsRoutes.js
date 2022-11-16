@@ -8,6 +8,7 @@ const brand=require('../models/brand')
 
 const { ObjectId } = require('mongodb');
 const Product = require('../models/product');
+const { json } = require('body-parser');
 
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
