@@ -5,12 +5,8 @@ const product= require('../models/product')
 const category= require('../models/category')
 const brand=require('../models/brand')
 const { ObjectId } = require('mongodb');
-<<<<<<< HEAD
-
-=======
 const Product = require('../models/product');
 const { json } = require('body-parser');
->>>>>>> 099a4da84f6ff17cd34945ba709f658e8e8483ae
 
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
