@@ -1,0 +1,26 @@
+"idUser": {
+    "$oid": "63731e9300120a655f64fcec"
+  },
+  "alias": "MiCasa",
+  "country": "Mexico",
+  "state": "Guanajuato",
+  "addres": "nuevo mexico #124 Celaya",
+  "cp": 38461,
+  "phone": {
+    "$numberLong": "4611234897"
+  },
+  "mail": "pedrohernandez@gmail.com"
+
+
+  "idUser": {
+    "$oid": "63731e2d00120a655f64fce7"
+  },
+  "alias": "Trabajo",
+  "country": "Mexico",
+  "state": "Guanajuato",
+  "addres": "Av. tecnologico #245 celaya",
+  "cp": 38258,
+  "phone": {
+    "$numberLong": "4611230021"
+  },
+  "mail": "mikyuwu2@gmail.com"

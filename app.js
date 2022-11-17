@@ -6,6 +6,9 @@ const productRoutes = require('./routes/productsRoutes')
 const userRoutes = require('./routes/userRoutes')
 const brandRoutes = require('./routes/brandRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
+const shippingRoutes = require('./routes/shippingInfoRoutes')
+const avatarImgRoutes = require('./routes/avatarImgRoutes')
+const cuponsRoutes=require('./routes/cuponsRoutes')
 const authJwt = require('./auth/jwt')
 const app = express()
 const port = 3000
@@ -22,6 +25,9 @@ app.use('/api/v1/store',userRoutes)
 app.use('/api/v1',productRoutes)
 app.use('/api/v1',brandRoutes)
 app.use('/api/v1',categoryRoutes)
+app.use('/api/v1',shippingRoutes)
+app.use('/api/v1',avatarImgRoutes)
+app.use('/api/v1',cuponsRoutes)
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
