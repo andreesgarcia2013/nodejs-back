@@ -17,9 +17,9 @@ router.get('/cupons', async (req, res)=>{
 })
 
 /* Obtener un solo cupon a partir de su ObjectID */
-router.get('/cupons/:id', async (req, res)=> {
+router.get('/cupons/:name', async (req, res)=> {
     try {
-        const cupons = await cupon.find({"_id":new ObjectId(req.params.id)});
+        const cupons = await cupon.find({"name": req.params.name});
         res.send(cupons)
     } catch (error) {
         console.log(error)

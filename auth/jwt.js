@@ -13,6 +13,7 @@ function authJwt() {
             {url: /\/api\/v1\/brands(.*)/ , methods: ['GET', 'OPTIONS'] },
             {url: /\/api\/v1\/categories(.*)/ , methods: ['GET', 'OPTIONS'] },
             {url: /\/api\/v1\/shippingInfo(.*)/ , methods: ['GET', 'OPTIONS'] },
+            {url: /\/api\/v1\/cupons(.*)/ , methods: ['GET', 'OPTIONS'] },
             `${api}/login`,
             `${api}/register`,
         ]
