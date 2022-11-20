@@ -16,11 +16,11 @@ const cors = require('cors')
 var corsOptions = {
     origin: 'http://localhost:8081',
     optionsSuccessStatus: 200,
-    methods: "GET,PUT,POST,DELETE"
+    methods: "GET,PUT,POST,DELETE,PATCH"
 }
 app.use(cors(corsOptions));
 app.use(express.json())
-app.use(authJwt())
+/* app.use(authJwt()) */
 app.use('/api/v1/store',userRoutes)
 app.use('/api/v1',productRoutes)
 app.use('/api/v1',brandRoutes)

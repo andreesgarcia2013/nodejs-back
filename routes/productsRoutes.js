@@ -7,6 +7,7 @@ const brand=require('../models/brand')
 const { ObjectId } = require('mongodb');
 const Product = require('../models/product');
 const { json } = require('body-parser');
+const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
@@ -72,7 +73,7 @@ router.get('/products/byBrand/:id', async (req,res)=>{
 })
 
 /* Crea un nuevo producto a partir del JSON que se recibe ¿validar back o front? */
-router.post('/products', async (req,res)=>{
+router.post('/products',isAdmin, async (req,res)=>{
     try{
         let productData = req.body
         productData['brand'] = new ObjectId(req.body.brand)
@@ -87,7 +88,7 @@ router.post('/products', async (req,res)=>{
 
 /* Se tiene que recibir un JSON con todos los campos, si se omite uno, al hacer la actualización lo marcará como nulo o mandara
    un error debido a las reglas establecidas en el esquema de mongoose*/
-router.put('/products/:id', async(req,res)=>{
+router.put('/products/:id',isAdmin, async(req,res)=>{
     try{
         product.findOne({_id: new ObjectId (req.params.id)}, async(error,doc)=>{
             if(error) throw error;
@@ -118,7 +119,7 @@ router.put('/products/:id', async(req,res)=>{
 
 /* Se puede recibir un JSON con los datos especificos que se quiere actualizar, y al momento de ejecutar la consulta los campos
    que no se encuentren en el JSON simplemente se quedan igual */
-router.patch('/products/:id', async(req,res)=>{
+router.patch('/products/:id',isAdmin, async(req,res)=>{
     try{
         const patchProductData = req.body
         product.updateOne({_id: new ObjectId(req.params.id)}, patchProductData, async(error,doc)=>{
@@ -131,7 +132,7 @@ router.patch('/products/:id', async(req,res)=>{
 })
 
 /* Elimina un producto a partir de su ObjectID */
-router.delete('/products/:id', async(req,res)=>{
+router.delete('/products/:id',isAdmin, async(req,res)=>{
     try{
         product.findOne({_id:new ObjectId(req.params.id)}, async(error,doc)=>{
             if(error) throw error;

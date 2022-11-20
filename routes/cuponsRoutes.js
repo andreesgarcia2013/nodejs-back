@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const cupon= require('../models/cupons')
 const { ObjectId } = require('mongodb');
-
+const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 
 
 //Obtener todos los cupones de la collection
@@ -27,7 +27,7 @@ router.get('/cupons/:name', async (req, res)=> {
 })
 
 /* Crea un nuevo cupon a partir del JSON que se recibe*/
-router.post('/cupons', async (req,res)=>{
+router.post('/cupons',isAdmin, async (req,res)=>{
     try{
         let cuponData = req.body
         const newCupon = new cupon(cuponData)
@@ -39,7 +39,7 @@ router.post('/cupons', async (req,res)=>{
 })
 
 /* Actualiza el nombre del cupon*/
-router.put('/cupons/:id', async(req,res)=>{
+router.put('/cupons/:id',isAdmin, async(req,res)=>{
     try{
         cupon.findOne({_id: new ObjectId (req.params.id)}, async(error,doc)=>{
             if(error) throw error;
@@ -56,7 +56,7 @@ router.put('/cupons/:id', async(req,res)=>{
     }
 })
 
-router.patch('/cupons/:id', async(req,res)=>{
+router.patch('/cupons/:id',isAdmin, async(req,res)=>{
     try{
         const patchCuponData = req.body
         cupon.updateOne({_id: new ObjectId(req.params.id)}, patchCuponData, async(error,doc)=>{
@@ -70,7 +70,7 @@ router.patch('/cupons/:id', async(req,res)=>{
 
 
 /* Elimina un cupon a partir de su ObjectID */
-router.delete('/cupons/:id', async(req,res)=>{
+router.delete('/cupons/:id',isAdmin, async(req,res)=>{
     try{
         cupon.findOne({_id:new ObjectId(req.params.id)}, async(error,doc)=>{
             if(error) throw error;

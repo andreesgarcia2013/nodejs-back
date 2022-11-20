@@ -4,9 +4,15 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 
 
-router.get(`/`, async (req, res) =>{
+router.get(`/`, isAdmin ,async (req, res) =>{
+    /* if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+        jwt.verify(req.headers.authorization.split(' ')[1],process.env.SECRET,function(err,decoded){
+            console.log(decoded)
+        });
+    } */
     const userList = await User.find().select('-passwordHash');
 
     if(!userList) {
@@ -15,7 +21,7 @@ router.get(`/`, async (req, res) =>{
     res.send(userList);
 })
 
-router.get('/:id', async(req,res)=>{
+router.get('/:id', allowUserInfo ,async(req,res)=>{
     const user = await User.findById(req.params.id).select('-passwordHash');
 
     if(!user) {
@@ -41,7 +47,7 @@ router.get('/:id', async(req,res)=>{
     res.send(user);
 }) */
 
-router.put('/:id',async (req, res)=> {
+router.put('/:id',allowUserInfo,async (req, res)=> {
 
     const userExist = await User.findById(req.params.id);
     let newPassword
@@ -67,6 +73,24 @@ router.put('/:id',async (req, res)=> {
     return res.status(400).send('The user cannot be created!')
 
     res.send(user);
+})
+
+//PATCH USERS
+router.patch('/:id',allowUserInfo,async(req,res)=>{
+    try{
+        const userData = req.body
+        if(req.body.password) {
+            newPassword = bcrypt.hashSync(req.body.password, 10)
+        }else{
+            delete req.body.password
+        }
+        User.updateOne({_id: new ObjectId(req.params.id)},userData, async(err,doc)=>{
+            if(err) throw err;
+            res.send(doc)
+        })
+    }catch(error){
+        console.log(error)
+    }
 })
 
 router.post('/login', async (req,res) => {
@@ -109,7 +133,7 @@ router.post('/register', async (req,res)=>{
 })
 
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id',allowUserInfo, (req, res)=>{
     User.findByIdAndRemove(req.params.id).then(user =>{
         if(user) {
             return res.status(200).json({success: true, message: 'the user is deleted!'})
@@ -121,7 +145,7 @@ router.delete('/:id', (req, res)=>{
     })
 })
 
-router.get(`/get/count`, async (req, res) =>{
+router.get(`/get/count`,isAdmin, async (req, res) =>{
     const userCount = await User.countDocuments()
 
     if(!userCount) {

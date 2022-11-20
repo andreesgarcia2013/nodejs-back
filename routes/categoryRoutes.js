@@ -4,6 +4,7 @@ const router = express.Router()
 const category=require('../models/category')
 const { ObjectId } = require('mongodb');
 const Category = require('../models/category');
+const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 
 /* Obtener todas las marcas de la collección */
 router.get('/categories', async (req, res)=>{
@@ -26,7 +27,7 @@ router.get('/categories/:id', async (req, res)=> {
 })
 
 /* Crea una nueva marca a partir del JSON que se recibe */
-router.post('/categories', async (req,res)=>{
+router.post('/categories',isAdmin, async (req,res)=>{
     try{
         let categoryData = req.body
         const newCategory = new category(categoryData)
@@ -38,7 +39,7 @@ router.post('/categories', async (req,res)=>{
 })
 
 /* Actualiza el nombre de la marca*/
-   router.put('/categories/:id', async(req,res)=>{
+   router.put('/categories/:id',isAdmin, async(req,res)=>{
     try{
         category.findOne({_id: new ObjectId (req.params.id)}, async(error,doc)=>{
             if(error) throw error;
@@ -57,7 +58,7 @@ router.post('/categories', async (req,res)=>{
 
 
 /* Elimina una marca a partir de su ObjectID */
-router.delete('/categories/:id', async(req,res)=>{
+router.delete('/categories/:id',isAdmin, async(req,res)=>{
     try{
         category.findOne({_id:new ObjectId(req.params.id)}, async(error,doc)=>{
             if(error) throw error;
