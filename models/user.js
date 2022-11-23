@@ -13,15 +13,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    date:{
+        type:String,
+        required:true,
+    },
+    phone:{ 
+        type: Number, 
+        required: true 
+    },
     isAdmin: {
         type: Boolean,
         required:false,
         default: false,
     },
     avatarId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'avatarsImg',
-        required:false,
+        type:String,
+        required:'false'
     }
 });
 

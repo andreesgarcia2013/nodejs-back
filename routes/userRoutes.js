@@ -63,6 +63,8 @@ router.put('/:id',allowUserInfo,async (req, res)=> {
             name: req.body.name,
             email: req.body.email,
             passwordHash: newPassword,
+            date:req.body.date,
+            phone:req.body.phone,
             avatarId: req.body.avatarId,
             isAdmin: req.body.isAdmin,
         },
@@ -121,8 +123,10 @@ router.post('/register', async (req,res)=>{
         name: req.body.name,
         email: req.body.email,
         passwordHash: bcrypt.hashSync(req.body.password, 10),
+        date:req.body.date,
+        phone:req.body.phone,
         isAdmin: req.body.isAdmin,
-        avatarId: new ObjectId(req.body.avatarId)
+        avatarId: req.body.avatarId
     })
     user = await user.save();
 
