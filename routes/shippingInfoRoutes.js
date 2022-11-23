@@ -43,7 +43,7 @@ router.get('/shippingInfo/:id',isAdmin, async (req, res)=> {
 router.post('/shippingInfo',isAdmin, async (req,res)=>{
     try{
         let shippingInfoData = req.body
-        shippingInfoData['idUser'] = new ObjectId(req.body.user)
+        shippingInfoData['idUser'] = new ObjectId(req.body.idUser)
         const newShipingInfo = new shippingInfo(shippingInfoData)
         let saveShippingInfo = await newShipingInfo.save()
         res.send(saveShippingInfo)
