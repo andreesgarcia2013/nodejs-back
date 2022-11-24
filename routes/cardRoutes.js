@@ -70,6 +70,7 @@ router.post('/cards',isAuthorized, async (req,res)=>{
             if(error) throw error;
             console.log(doc)
             doc.ownerID=new ObjectId( req.body['ownerId'])
+            doc.name=req.body['name']
             doc.number=req.body['number']
             doc.cvv=req.body['cvv']
             doc.expires_date=req.body['expires_date']

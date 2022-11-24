@@ -6,9 +6,10 @@ const cardSchema=mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         require: false},
-    number:{ type: Number, required: true },
-    cvv:{ type: Number, required: true },
-    expires_date:{ type: String, required: true }
+        name:{type:String,required:true},
+        number:{ type: Number, required: true },
+        cvv:{ type: Number, required: true },
+        expires_date:{ type: String, required: true }
 },{collection:'cards'})
 
 
