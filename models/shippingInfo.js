@@ -11,7 +11,7 @@ const shippingInfoSchema=mongoose.Schema({
     suburb:{ type: String, required: true },
     state:{ type: String, required: true },
     street:{type:String,required:true},
-    number:{type:Number,required:true},
+    number:{type:String,required:true},
     cp:{ type: Number, required: true },
     phone:{ type: Number, required: true }
 },{collection:'shippingInfo'})
