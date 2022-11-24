@@ -41,7 +41,7 @@ router.get('/shippingInfo/:id',isAuthorized, async (req, res)=> {
 
 
 /* Crea una nueva direccion a partir del JSON que se recibe ¿validar back o front? */
-router.post('/shippingInfo',isAisAuthorizeddmin, async (req,res)=>{
+router.post('/shippingInfo',isAuthorized, async (req,res)=>{
     try{
         let shippingInfoData = req.body
         shippingInfoData['idUser'] = new ObjectId(req.body.idUser)
@@ -108,4 +108,3 @@ router.delete('/shippingInfo/:id',isAuthorized, async(req,res)=>{
 })
 
 module.exports = router;
-
