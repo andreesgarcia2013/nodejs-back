@@ -10,6 +10,7 @@ const shippingInfoSchema=mongoose.Schema({
     country:{ type: String, required: true },
     state:{ type: String, required: true },
     address:{type:String,required:true},
+    number:{type:Number,required:true},
     cp:{ type: Number, required: true },
     phone:{ type: Number, required: true }
 },{collection:'shippingInfo'})
