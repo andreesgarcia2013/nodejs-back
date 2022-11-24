@@ -7,9 +7,10 @@ const shippingInfoSchema=mongoose.Schema({
         ref: 'User',
         require: false},
     alias: { type: String, required: true },
-    country:{ type: String, required: true },
+    city:{type: String,required: true},
+    suburb:{ type: String, required: true },
     state:{ type: String, required: true },
-    address:{type:String,required:true},
+    street:{type:String,required:true},
     number:{type:Number,required:true},
     cp:{ type: Number, required: true },
     phone:{ type: Number, required: true }

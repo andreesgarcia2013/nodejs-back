@@ -20,7 +20,6 @@ router.get('/shippingInfo',isAdmin, async (req, res)=>{
 router.get('/shippingInfo/byuser/:id',allowUserInfo, async (req, res)=>{
     try{
         let shippingInfos = await shippingInfo.find({'idUser':new ObjectId(req.params.id)});
-        shippingInfos=shippingInfos[0] //normalizar array
         res.send(shippingInfos);
     }catch (error) {
         console.log(error);
@@ -62,9 +61,9 @@ router.post('/shippingInfo',isAuthorized, async (req,res)=>{
             console.log(doc)
             doc.idUser=new ObjectId( req.body['idUser'])
             doc.alias=req.body['alias']
-            doc.country=req.body['country']
+            doc.city=req.body['city']
             doc.state=req.body['state']
-            doc.address=req.body['address']
+            doc.street=req.body['street']
             doc.number=req.body['number']
             doc.cp=req.body['cp']
             doc.phone=req.body['phone']
