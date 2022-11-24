@@ -44,7 +44,6 @@ const purchaseSchema=mongoose.Schema({
                 required: true,
                 default: 0
             },
-            default:[]
         }
     ],
     idCard:{

@@ -17,7 +17,7 @@ router.get('/purchases', async(req,res)=>{
                                                     path:'products',
                                                     populate:{
                                                         path:'idProduct',
-                                                        select:'name -_id',
+                                                        select:'name gallery -_id',
                                                         model:'product'
                                                     }
                                                 });
@@ -35,7 +35,7 @@ router.get('/purchases/byUser/:id', async(req,res)=>{
                                                     path:'products',
                                                     populate:{
                                                         path:'idProduct',
-                                                        select:'name -_id',
+                                                        select:'name gallery -_id',
                                                         model:'product'
                                                     }
                                                 });
