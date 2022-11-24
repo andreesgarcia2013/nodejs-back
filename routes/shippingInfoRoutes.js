@@ -19,7 +19,8 @@ router.get('/shippingInfo',isAdmin, async (req, res)=>{
 /* Obtener todas las direcciones del  usuario dado su id*/
 router.get('/shippingInfo/byuser/:id',allowUserInfo, async (req, res)=>{
     try{
-        const shippingInfos = await shippingInfo.find({'idUser':new ObjectId(req.params.id)});
+        let shippingInfos = await shippingInfo.find({'idUser':new ObjectId(req.params.id)});
+        shippingInfos=shippingInfos[0] //normalizar array
         res.send(shippingInfos);
     }catch (error) {
         console.log(error);

@@ -8,7 +8,7 @@ const { isAdmin, allowUserInfo,isUser, isAuthorized } = require('../auth/jwt-aut
 /*Obtiene todas las tarjetas de todos los usuarios*/
 router.get('/cards',isAdmin, async (req, res)=>{
     try{
-        const cards = await card.find({});
+        const cards = await card.find({}).populate('ownerId', 'name');
         res.send(cards);
     }catch (error) {
         console.log(error);

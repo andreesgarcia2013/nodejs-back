@@ -78,13 +78,35 @@ router.put('/:id',allowUserInfo,async (req, res)=> {
 })
 
 //PATCH USERS
-router.patch('/:id',allowUserInfo,async(req,res)=>{
+/* router.patch('/:id',allowUserInfo,async(req,res)=>{
     try{
         const userData = req.body
         if(req.body.password) {
             newPassword = bcrypt.hashSync(req.body.password, 10)
         }else{
             delete req.body.password
+        }
+        User.updateOne({_id: new ObjectId(req.params.id)},userData, async(err,doc)=>{
+            if(err) throw err;
+            res.send(doc)
+        })
+    }catch(error){
+        console.log(error)
+    }
+}) */
+
+//PATCH USERS
+router.patch('/:id',allowUserInfo,async(req,res)=>{
+    try{
+        var userData = req.body
+        if(req.body.password){
+            if(req.body.password!=='') {
+                newPassword = bcrypt.hashSync(req.body.password, 10)
+                req.body.passwordHash= newPassword
+                userData=req.body
+            }else{
+                delete req.body.password
+            }
         }
         User.updateOne({_id: new ObjectId(req.params.id)},userData, async(err,doc)=>{
             if(err) throw err;
