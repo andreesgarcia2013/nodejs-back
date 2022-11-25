@@ -46,9 +46,8 @@ const purchaseSchema=mongoose.Schema({
             },
         }
     ],
-    idCard:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'card',
+    cardNumber:{
+        type: Number,
         required: false,
         default: null
     },

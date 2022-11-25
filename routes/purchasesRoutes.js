@@ -12,7 +12,6 @@ const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 router.get('/purchases', async(req,res)=>{
     try{
         const Purchases = await purchases.find({}).populate('idUser', 'name -_id')
-                                                .populate('idCard','number -_id')
                                                 .populate({
                                                     path:'products',
                                                     populate:{
@@ -30,7 +29,6 @@ router.get('/purchases', async(req,res)=>{
 router.get('/purchases/byUser/:id', async(req,res)=>{
     try{
         const Purchases = await purchases.find({idUser:new ObjectId(req.params.id)}).populate('idUser', 'name -_id')
-                                                .populate('idCard','number -_id')
                                                 .populate({
                                                     path:'products',
                                                     populate:{
@@ -50,9 +48,6 @@ router.post('/purchases',async(req,res)=>{
         let purchasesData=req.body
         if(req.body.idUser){
             purchasesData['idUser']=new ObjectId(req.body.idUser)
-        }
-        if(req.body.idCard){
-            purchasesData['idCard']=new ObjectId(req.body.idCard)
         }
         if(req.body.products!==[]&&req.body.products){
             var n=req.body.products.length
