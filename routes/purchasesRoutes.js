@@ -43,6 +43,26 @@ router.get('/purchases/byUser/:id', async(req,res)=>{
     }
 })
 
+router.get('/purchases/:id',async(req,res)=>{
+    try{
+        const Purchase = await purchases.findById({_id:new ObjectId(req.params.id)})
+                                                .populate({
+                                                    path:'products',
+                                                    populate:{
+                                                        path:'idProduct',
+                                                        select:'name gallery price _id',
+                                                        model:'product'
+                                                    }
+                                                });
+        if(Purchase.idUser!==null){
+            await Purchase.populate('idUser', 'name -_id');
+        }
+        res.send(Purchase);
+    }catch (error) {
+        console.log(error);
+    }
+})
+
 router.post('/purchases',async(req,res)=>{
     try{
         let purchasesData=req.body

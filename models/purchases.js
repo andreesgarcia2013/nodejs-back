@@ -7,6 +7,11 @@ const purchaseSchema=mongoose.Schema({
         required: false,
         default: null
     },
+    name:{
+        type:String,
+        required: false,
+        default:'unknown user'
+    },
     address:{
         type: String,
         required: true
