@@ -12,7 +12,7 @@ const {isAdmin,allowUserInfo,isAuthorized} =require('../auth/jwt-auth')
 /* Obtener todos los produtos de la collección */
 router.get('/products', async (req, res)=>{
     try{
-        const products = await product.find({}).populate('brand', 'name -_id').populate('category', 'name -_id');
+        const products = await product.find({}).populate('brand', 'name _id').populate('category', 'name _id');
         res.send(products);
     }catch (error) {
         console.log(error);
