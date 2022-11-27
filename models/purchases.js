@@ -27,7 +27,7 @@ const purchaseSchema=mongoose.Schema({
         default: 0
     },
     date:{
-        type: String,
+        type: Date,
         required: true,
         default: ''
     },
