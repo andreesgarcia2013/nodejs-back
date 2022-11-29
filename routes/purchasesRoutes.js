@@ -137,7 +137,7 @@ router.get('/reports/purchases/byMonth/:month/byYear/:year',async(req,res)=>{
                 }
             }
         ]).exec();
-        res.status(200).send(data) 
+        res.status(200).send(data[0]) 
     }catch(error){
         console.log(error)
     }
